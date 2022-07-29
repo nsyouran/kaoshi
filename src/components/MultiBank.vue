@@ -1,14 +1,19 @@
 <template>
     <div class="multi_bank">
         <div class="bank" v-for="ques, key in bank" :key="key" v-if="key < limit">
-            {{ ques.id }}{{ ques.title }}
+            <div class="ques-title">
+                {{ ques.id }}{{ ques.title }}
+            </div>
             <el-checkbox-group v-model="ques.user_answer" @change="multi_change($event, key, ques.id)">
-                <div v-for="option, _key in ques.options" :key="_key" class="option">
-                    <div :class="ques.answer.indexOf(option) !== -1 ? 'item-success' : 'error'">
-                        <el-checkbox :label="option"></el-checkbox>
-                    </div>
+                <div v-for="option, _key in ques.options" :key="_key" class="option"
+                    :class="showTip && (ques.user_answer.indexOf(option) !== -1 || ques.answer.indexOf(option) !== -1) ? ques.answer.indexOf(option) !== -1 && ques.user_answer.indexOf(option) !== -1 ? 'success' : 'error' : ''">
+                    <el-checkbox :label="option"></el-checkbox>
                 </div>
             </el-checkbox-group>
+            <!-- <div v-if="showTip" style="padding: 10px 20px; color: green; font-size: 0.9em;">
+                <div>我的答案：</div>
+                <div v-for="ans, i in ques.user_answer" :key="i">{{ ans }}</div>
+            </div> -->
             <div v-if="showTip" style="padding: 10px 20px; color: green; font-size: 0.9em;">
                 <div>答案：</div>
                 <div v-for="ans, i in ques.answer" :key="i">{{ ans }}</div>
@@ -47,15 +52,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .option {
-//     border: 1px solid red;
-// }
+.ques-title {
+    // border: 1px solid blue;
+    margin-bottom: 10px;
+}
 
-// .item-success {
-//     background-color: green;
-// }
+.option {
+    // border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
 
-// .item-error {
-//     background-color: red;
-// }
+.success {
+    border: 1px solid green;
+}
+
+.error {
+    border: 1px solid red;
+}
 </style>

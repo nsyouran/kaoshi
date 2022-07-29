@@ -1,36 +1,56 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/answer">答案</router-link>
+    <nav class="nav">
+      <!-- <el-button @click="reset">重置题库</el-button> -->
+      <!-- <router-link to="/">Home</router-link> | -->
+      <router-link to="/exe">刷题</router-link>
+      <!-- | -->
+      <!-- <router-link to="/about">About</router-link> | -->
+      <!-- <router-link to="/answer">答案</router-link> -->
     </nav>
-    <router-view />
+    <router-view class='view' />
   </div>
 </template>
 
+<script>
+export default {
+  methods: {
+    reset() {
+      window.localStorage.setItem('bank', '')
+    }
+  }
+}
+</script>
+
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 
-nav {
-  padding: 30px;
+  .nav {
+    // border: 1px solid blue;
+    flex-shrink: 0;
+    padding: 10px;
+  }
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  .view {
+    // border: 1px solid red;
+    flex-grow: 1;
   }
 }
-
 
 
 .big_title {

@@ -2,14 +2,14 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AnswerView from '../views/AnswerView.vue'
+import ExeView from '../views/ExeView.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    redirect: 'exe'
   },
   {
     path: '/about',
@@ -23,6 +23,11 @@ const routes = [
     path: '/answer',
     name: 'answer',
     component: AnswerView
+  },
+  {
+    path: '/exe',
+    name: 'exe',
+    component: ExeView
   }
 ]
 

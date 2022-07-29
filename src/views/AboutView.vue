@@ -53,38 +53,4 @@ export default {
 .root {
   text-align: left;
 }
-
-.big_title {
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.bank {
-  // border: 1px solid red;
-  margin-bottom: 10px;
-}
-
-.el-radio,
-.el-checkbox {
-  // border: 1px solid yellow;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 10px 20px;
-  display: flex;
-}
-
-.el-radio__input,
-.el-checkbox__input {
-  // border: 1px solid blue;
-  display: inline-block;
-}
-
-.el-radio__label,
-.el-checkbox__label {
-  // border: 1px solid red;
-  white-space: normal;
-  word-break: break-all;
-  display: inline-block;
-}
 </style>

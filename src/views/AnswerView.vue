@@ -48,7 +48,7 @@ export default {
     },
     data() {
         return {
-            type: 'multi_bank',
+            type: 'case_bank',
             radio_bank: [],
             multi_bank: [],
             judge_bank: [],
@@ -77,6 +77,17 @@ export default {
             item.user_answer = []
             return true
         })
+        this.judge_bank = this.bank.judge_bank.filter(item => {
+            item.user_answer = ''
+            return true
+        })
+        this.case_bank = this.bank.case_bank.filter(item => {
+            item.ques_bank = item.ques_bank.filter(ques => {
+                ques.user_answer = []
+                return true
+            })
+            return true
+        })
         // console.log(this.bank.radio_bank[0])
     },
     methods: {
@@ -96,7 +107,25 @@ export default {
             this.bank.multi_bank = this.multi_bank
             window.localStorage.setItem('bank', JSON.stringify(this.bank))
             // this.index++
-        }
+        },
+        judge_change(e) {
+            console.log(e)
+            let { q_idx, answer } = e
+            this.judge_bank[this.index].answer = answer
+            // console.log(this.index, this.radio_bank[this.index])
+            this.bank.judge_bank = this.judge_bank
+            window.localStorage.setItem('bank', JSON.stringify(this.bank))
+            this.index++
+        },
+        case_change(e) {
+            console.log(e, this.case_bank[this.index])
+            let { q_idx, answer } = e
+            this.case_bank[this.index].ques_bank[q_idx].answer = answer
+            // // console.log(this.index, this.radio_bank[this.index])
+            this.bank.case_bank = this.case_bank
+            window.localStorage.setItem('bank', JSON.stringify(this.bank))
+            // // this.index++
+        },
     }
 }
 </script>

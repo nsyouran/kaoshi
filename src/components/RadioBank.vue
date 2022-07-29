@@ -1,14 +1,17 @@
 <template>
     <div class="radio_bank">
-        <div class="bank" v-for="ques, key in bank" :key="key" v-if="key < limit && ques.id">
-            {{ ques.id }}{{ ques.title }}
-            <div v-for="option, _key in ques.options" :key="_key" class="option">
-                <div class="state">
+        <div class="bank" v-for="ques, key in bank" :key="key" v-if="key < limit">
+            <div class="ques-title">
+                {{ ques.id }}{{ ques.title }}
+            </div>
+            <div v-for="option, _key in ques.options" :key="_key" class="option"
+                :class="showTip && option === ques.user_answer ? ques.answer === ques.user_answer ? 'success' : 'error' : ''">
+                <!-- <div class="state">
                     <div v-if="ques.user_answer === option">
                         <i class="el-icon-check success" v-if="ques.user_answer === ques.answer"></i>
                         <i class="el-icon-close error" v-else></i>
                     </div>
-                </div>
+                </div> -->
                 <el-radio v-model="ques.user_answer" :label="option" @change="radio_change($event, key, ques.id)">{{
                         option
                 }}
@@ -52,10 +55,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ques-title {
+    // border: 1px solid blue;
+    margin-bottom: 10px;
+}
+
 .option {
     // border: 1px solid red;
+    border-radius: 5px;
+    margin-bottom: 10px;
     display: flex;
     flex-direction: row;
+}
+
+.success {
+    border: 1px solid green;
+}
+
+.error {
+    border: 1px solid red;
 }
 
 .state {
