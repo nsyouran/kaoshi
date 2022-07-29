@@ -1,13 +1,20 @@
 <template>
     <div class="radio_bank">
-        <div class="bank" v-for="ques, key in bank" :key="key" v-if="key < limit">
+        <div class="bank" v-for="ques, key in bank" :key="key" v-if="key < limit && ques.id">
             {{ ques.id }}{{ ques.title }}
-            <div v-for="option, _key in ques.options" :key="_key">
+            <div v-for="option, _key in ques.options" :key="_key" class="option">
+                <div class="state">
+                    <div v-if="ques.user_answer === option">
+                        <i class="el-icon-check success" v-if="ques.user_answer === ques.answer"></i>
+                        <i class="el-icon-close error" v-else></i>
+                    </div>
+                </div>
                 <el-radio v-model="ques.user_answer" :label="option" @change="radio_change($event, key, ques.id)">{{
                         option
                 }}
                 </el-radio>
             </div>
+            <div v-if="showTip" style="padding: 10px 20px; color: green; font-size: 0.9em;">答案：{{ ques.answer }}</div>
         </div>
     </div>
 </template>
@@ -15,16 +22,25 @@
 <script>
 export default {
     props: {
-        bank: Array,
+        bank: {
+            type: Array, default() { return [] }
+        },
         limit: {
             type: Number,
             default: 10000
+        },
+        showTip: {
+            type: Boolean,
+            default() { return false }
         }
     },
     data() {
         return {
 
         }
+    },
+    mounted() {
+        // console.log('------------', this.bank)
     },
     methods: {
         radio_change(e, key, id) {
@@ -36,4 +52,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.option {
+    // border: 1px solid red;
+    display: flex;
+    flex-direction: row;
+}
+
+.state {
+    // border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    width: 1em;
+
+    .success {
+        color: green;
+    }
+
+    .error {
+        color: red
+    }
+}
 </style>

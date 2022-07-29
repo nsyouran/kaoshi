@@ -26,11 +26,10 @@ export default {
   data() {
     return {
       bank: {},
-      user_answer: []
     }
   },
   mounted() {
-    console.log('mounted',)
+    // console.log('mounted',)
     this.bank = this._bank_
   },
   methods: {
